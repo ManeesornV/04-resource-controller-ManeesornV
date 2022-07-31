@@ -25,7 +25,7 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        //
+        return view("artists.create");
     }
 
     /**
@@ -36,7 +36,15 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $artist = new Artist();
+        $artist->name = $request->input('name');
+        $artist->genres = $request->input('genres');
+        $artist->songs = $request->input('songs');
+        $artist->popularity = $request->input('popularity');
+        $artist->link = $request->input('link');
+        $artist->save();
+        return redirect()->route('artists.show', ['artist' => $artist->id]);
+
     }
 
     /**
@@ -47,7 +55,7 @@ class ArtistController extends Controller
      */
     public function show(Artist $artist)
     {
-        //
+        return view('artists.show',['artist' => $artist]);
     }
 
     /**
@@ -58,7 +66,7 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        //
+        return view('artists.edit', ['artist'=>$artist]);
     }
 
     /**
@@ -70,7 +78,13 @@ class ArtistController extends Controller
      */
     public function update(Request $request, Artist $artist)
     {
-        //
+        $artist->name = $request->input('name');
+        $artist->genres = $request->input('genres');
+        $artist->songs = $request->input('songs');
+        $artist->popularity = $request->input('popularity');
+        $artist->link = $request->input('link');
+        $artist->save();
+        return $request->route('artists.show',['artist'=>$artist->id]);
     }
 
     /**
@@ -79,8 +93,14 @@ class ArtistController extends Controller
      * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Artist $artist)
+    public function destroy(Request $request, Artist $artist)
     {
         //
+        $name = $request->input('name');
+        if($name == $artist->name){
+            $artist->delete();
+            return redirect()->route('artists.index');
+        }
+        return redirect()->back();
     }
 }

@@ -10,12 +10,12 @@
     <title>Assignment 04</title>
 </head>
 <body>
-    <nav>
+<nav>
 
-    </nav>
+</nav>
 
-    <div class="mx-auto max-w-6xl">
-        @yield('content')
-    </div>
+<div class="mx-auto max-w-6xl">
+    @yield('content')
+</div>
 </body>
 </html>

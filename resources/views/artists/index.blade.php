@@ -7,6 +7,7 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
                 <th class="py-3 px-6">Name</th>
+                <th class="py-3 px-6">Genres</th>
                 <th class="py-3 px-6">Songs</th>
                 <th class="py-3 px-6">Popularity</th>
             </tr>
@@ -14,7 +15,10 @@
             <tbody>
             @foreach ($artists as $artist)
                 <tr class="bg-white border-t">
-                    <td class="py-4 px-6">{{ $artist->name }}</td>
+                    <td class="py-4 px-6" >
+                        <a href="{{route('artists.show', ['artist'=>$artist->id])}}">{{ $artist->name }}</a>
+                    </td>
+                    <td class="py-4 px-6">{{ $artist->genres }}</td>
                     <td class="py-4 px-6">{{ $artist->songs }}</td>
                     <td class="py-4 px-6">{{ $artist->popularity }}</td>
                 </tr>
